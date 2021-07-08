@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block start %}
+
+        
+        {% for resto in resto_objs  %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <h2><a class="article-title" href="">{{ resto.shopkeeper}}</a></h2>
+              <h2>welcome restaurant owner {{ resto.shopkeeper}}</h2>
+            </div>
+            <p class="article-content">{{ resto.restaurant_name}}</p>
+            <p class="article-content">{{ resto.restaurant_descripton}}</p>
+            <p class="article-content">{{ resto.restaurant_address}}</p>
+            <p class="article-content">{{ resto.restaurant_pincode}}</p>
+            <p class="article-content">{{ resto.lattitude}}</p>
+            <div class="article-metadata">
+              <small class="text-muted">{{ resto.longitude}}</small>
+
+            </div>
+            <p class="article-content">{{ resto.restraunt_image}}</p>
+
+          </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block start %}
+
+        {% for menu in resto_menu  %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <h2><a class="article-title" href=""> restoname :-{{menu.restaurant}}</a></h2>
+              <h2>restaurant owned by {{ menu.restaurant.shopkeeper}}</h2>
+            </div>
+            <p class="article-content">Food Type :-{{menu.food_item_type}}</p>
+            <p class="article-content">Iteam Price:-{{menu.menu_price}}</p>
+            <p class="article-content">Iteam Name:-{{menu.menu_name}}</p>
+            <p class="article-content">Iteam Description:-{{menu.menu_description}}</p>
+            <p class="article-content">Iteam Type:-{{menu.menu_type}}</p>
+            <p class="article-content">Iteam Image:-{{ menu.menu_image}}</p>
+          </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}

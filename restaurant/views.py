@@ -2,8 +2,12 @@ from django.shortcuts import redirect, render
 from .models import *
 from accounts.models import *
 from .forms import *
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import (
+    ListView,)
 
-
+@login_required(login_url='/accounts/login/')
 def add_restaurant(request):
     context ={}
   
@@ -20,7 +24,7 @@ def add_restaurant(request):
     return render(request, "restaurant/addresto.html", context)
 
 
-
+@login_required(login_url='/accounts/login/')
 def add_menu(request):
     context ={}
   
@@ -38,6 +42,27 @@ def add_menu(request):
 
 
 
-def resto_detail(request):
+@login_required(login_url='/accounts/login/')
+def resto_detail(request,):
+    user=Restaurant.objects.all()
+    data = request.user 
+    return render(request, 'restaurant/restodetail.html', {'user' : user, 'data':data})
+
+
+
+
+class RestaurantListView(LoginRequiredMixin,ListView):
     resto_objs=Restaurant.objects.all()
-    return render(request,"restaurant/allresto.html",{'resto_objs':resto_objs})
+
+    model = Restaurant
+    template_name = 'restaurant/restodetail.html'
+    context_object_name = 'resto_objs'
+    
+    def get_queryset(self):
+        return Restaurant.objects.all().filter(shopkeeper=self.request.user)
+
+
+def restaurant_menu_detail(request):
+    resto_menu=RestrauntMenu.objects.all()
+    return render(request,'restaurant/menudetail.html',{'resto_menu': resto_menu})
+    

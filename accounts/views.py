@@ -131,10 +131,16 @@ def login_shopkeeper(request):
 
             login(request,user)
             messages.success(request, ('welcome shopkeeper'))
-            return redirect('/home/')
+            return redirect('/restaurant/add-restaurant/')
     except Exception as e:
         print(e)
     return render(request,'accounts/login.html')
+
+from django.contrib.auth import logout
+
+def signout(request):
+    logout(request)
+    return redirect('/home/')
 
 def forget_password(request):
     try:
