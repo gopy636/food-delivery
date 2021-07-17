@@ -2,19 +2,22 @@
 {% block start %}
 
 <div class="container">
-<div class="row  mt-5 pt-5">
-    <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
-            <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">drumbit</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div class="row  mt-5 pt-5">
+    {% for  restaurant in restaurants %}
+      <div class="col-md-3">
+          <div class="card" style="width: 18rem;">
+              <img src="/media/{{restaurant.restraunt_image}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{restaurant.restaurant_name}}</h5>
+                <p class="card-text">{{restaurant.restaurant_descripton}}</p>
+                <a href="{% url 'restraunt_detail' restaurant.id %}" class="btn btn-primary">Order Now</a>
+              </div>
             </div>
-          </div>
-    </div>
-</div>
-</div>
+      </div>
+      {% endfor %}
+  </div>
+  </div>
+  
 
 
 {% endblock %}

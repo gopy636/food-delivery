@@ -3,9 +3,9 @@
 from django.db import models
 from accounts.models import Shopkeeper
 from home.models import BaseModel
+from django.utils.text import slugify
 
 class FoodItem(BaseModel):
-
     '''
     FoodItem model handling Food Type
     '''
@@ -26,6 +26,7 @@ class Restaurant(BaseModel):
     restaurant_address = models.TextField()
     restaurant_pincode = models.CharField(max_length=100)
     restaurant_rating = models.IntegerField(default=-1)
+    slug = models.SlugField(unique=True ,null=True , blank=True )
     lattitude = models.CharField(max_length=100)
     longitude = models.CharField(max_length=100)
     restraunt_image = models.ImageField(upload_to = 'restaurant')
@@ -36,6 +37,12 @@ class Restaurant(BaseModel):
 
     def __str__(self) -> str:
         return self.restaurant_name
+    
+
+    def save(self , *args , **kwargs):
+        self.slug = slugify(self.restaurant_name)
+        super(Restaurant , self).save(*args , **kwargs)        
+
 
 
 class RestrauntMenu(BaseModel):
@@ -55,3 +62,6 @@ class RestrauntMenu(BaseModel):
 
     def __str__(self):
         return self.menu_name
+
+    
+  

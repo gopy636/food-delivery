@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block start %}
+
+<div class="container">
+  <div class="row  mt-5 pt-5">
+    {% for menu in menus %}
+      <div class="col-md-3">
+          <div class="card" style="width: 18rem;">
+              <img src="/media/{{menu.menu_image}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{menu.restaurant.restaurant_name}}</h5>
+                <h5 class="card-title">{{menu.menu_name}}</h5>
+                <p class="card-text">{{menu.menu_description}}</p>
+                  <a href="{% url 'add_cart' menu.id %}" class="btn btn-primary btn-sm data-toggle="toast"
+                 data-target="#cart-toast">+<i class="czi-cart font-size-base ml-1"></i>
+                  </a>
+                  <a href="{% url 'remove-cart' menu.id %}" class="btn btn-primary btn-sm data-toggle="toast"
+                 data-target="#cart-toast">-<i class="czi-cart font-size-base ml-1"></i>
+                  </a>
+              </div>
+            </div>
+      </div>
+      {% endfor %}
+  </div>
+  </div>
+  
+
+
+{% endblock %}

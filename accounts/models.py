@@ -45,6 +45,15 @@ class Customer(User):
     class Meta:
         db_table = 'Customer'
 
+    def get_cart_count(self):
+        try:
+            cart = self.customer_cart.get(is_paid = False)
+            return cart.cart.count()
+        except Exception as e:
+            return 0
+        return 0
+
+
 @receiver(post_save, sender=Customer)
 def send_mail(sender,instance,created, **kwargs):
     if created:

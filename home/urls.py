@@ -7,6 +7,7 @@ from home.views import *
 
 urlpatterns = [
     
-    path('', home)
+    path('', home),
+    path('menu/<slug>/',view_menu, name="restraunt_detail")
 
 ]
